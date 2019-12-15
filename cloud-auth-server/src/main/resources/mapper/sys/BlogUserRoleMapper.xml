@@ -22,7 +22,7 @@
   <insert id="insert" parameterType="com.cloud.blog.model.po.sys.BlogUserRole">
     insert into blog_user_role (id, user_id, role_id
       )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=LONG}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cloud.blog.model.po.sys.BlogUserRole">

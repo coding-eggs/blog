@@ -1,8 +1,8 @@
 package com.cloud.blog.auth.config.pojo;
 
 import com.cloud.blog.model.po.sys.BlogUser;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,13 +17,14 @@ import java.util.Collection;
  * @create: 2019-12-13 01:03
  **/
 @Data
+@AllArgsConstructor
 public class BaseSecurityUser implements UserDetails,CredentialsContainer {
 
     private User user;
 
     private BlogUser blogUser;
 
-    @Override
+        @Override
     public void eraseCredentials() {
         user.eraseCredentials();
     }

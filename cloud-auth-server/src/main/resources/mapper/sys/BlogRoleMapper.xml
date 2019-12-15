@@ -14,6 +14,12 @@
     from blog_role
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectRoleListByUserId" resultType="com.cloud.blog.model.po.sys.BlogRole">
+    select br.id,
+           role_name
+    from blog_role br
+    where br.id in (select bur.role_id from blog_user_role bur where user_id = #{userId,jdbcType=INTEGER})
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from blog_role
     where id = #{id,jdbcType=BIGINT}
