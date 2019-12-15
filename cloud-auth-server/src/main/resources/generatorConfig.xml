@@ -45,7 +45,7 @@
         </javaClientGenerator>
 
 
-        <table  schema="cloud_blog" tableName="blog_group_user" domainObjectName="BlogGroupUser"
+        <table  schema="cloud_blog" tableName="blog_user" domainObjectName="BlogUser"
                 enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                 enableSelectByExample="false" selectByExampleQueryId="false" >
             <!-- 忽略字段 可选的（0 or 1） -->

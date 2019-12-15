@@ -15,4 +15,6 @@ public interface BlogUserMapper {
     int updateByPrimaryKeySelective(BlogUser record);
 
     int updateByPrimaryKey(BlogUser record);
+
+    BlogUser selectUserByUsername(@Param("username") String username);
 }

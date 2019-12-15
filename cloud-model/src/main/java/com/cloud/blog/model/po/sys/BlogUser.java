@@ -38,4 +38,5 @@ public class BlogUser {
 
     private Byte isDelete;
 
+
 }
