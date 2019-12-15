@@ -1,0 +1,16 @@
+server:
+  port: 5000
+spring:
+  application:
+    name: admin-server
+  security:
+    user:
+      name: ailuoli
+      password: 961226
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/   #\u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u5730\u5740

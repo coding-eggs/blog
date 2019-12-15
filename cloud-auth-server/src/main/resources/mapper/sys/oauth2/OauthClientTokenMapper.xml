@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.blog.auth.mapper.sys.oauth2.OauthClientTokenMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.blog.model.po.sys.oauth2.OauthClientToken">
+    <id column="authentication_id" jdbcType="VARCHAR" property="authenticationId" />
+    <result column="token_id" jdbcType="VARCHAR" property="tokenId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="client_id" jdbcType="VARCHAR" property="clientId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cloud.blog.model.po.sys.oauth2.OauthClientToken">
+    <result column="token" jdbcType="LONGVARBINARY" property="token" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    authentication_id, token_id, user_name, client_id
+  </sql>
+  <sql id="Blob_Column_List">
+    token
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from oauth_client_token
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from oauth_client_token
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.blog.model.po.sys.oauth2.OauthClientToken">
+    insert into oauth_client_token (authentication_id, token_id, user_name, 
+      client_id, token)
+    values (#{authenticationId,jdbcType=VARCHAR}, #{tokenId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{clientId,jdbcType=VARCHAR}, #{token,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.blog.model.po.sys.oauth2.OauthClientToken">
+    insert into oauth_client_token
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authenticationId != null">
+        authentication_id,
+      </if>
+      <if test="tokenId != null">
+        token_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="clientId != null">
+        client_id,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authenticationId != null">
+        #{authenticationId,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenId != null">
+        #{tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null">
+        #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.blog.model.po.sys.oauth2.OauthClientToken">
+    update oauth_client_token
+    <set>
+      <if test="tokenId != null">
+        token_id = #{tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="clientId != null">
+        client_id = #{clientId,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cloud.blog.model.po.sys.oauth2.OauthClientToken">
+    update oauth_client_token
+    set token_id = #{tokenId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      client_id = #{clientId,jdbcType=VARCHAR},
+      token = #{token,jdbcType=LONGVARBINARY}
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.blog.model.po.sys.oauth2.OauthClientToken">
+    update oauth_client_token
+    set token_id = #{tokenId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      client_id = #{clientId,jdbcType=VARCHAR}
+    where authentication_id = #{authenticationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

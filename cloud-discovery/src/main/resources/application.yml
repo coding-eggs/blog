@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: eureka-server
+  security:
+    user:
+      name: ailuoli
+      password: 961226
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false  #不向自身注册自己
+    fetch-registry: false #因为该服务没有注册到其他注册中心，所以
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/   #服务注册中心地址
+
+  server:
+    renewal-percent-threshold: 0.49  #设置心跳正常的阈值，默认为1 ，测试时可以调低
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
