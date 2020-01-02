@@ -1,0 +1,48 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: cloud-gateway
+  security:
+    user:
+      name: ailuoli
+      password: 961226
+  redis:
+    database: 2
+    host: 101.37.174.133
+    port: 1235
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/   #\u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u5730\u5740
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+
+security:
+  oauth2:
+    client:
+      client-id: ${spring.application.name}
+      client-secret: blog
+      user-authorization-uri: http://auth-server:9527/oauth/authoriza
+      access-token-uri: http://auth-server:9527/oauth/token
+    resource:
+      jwt:
+        key-uri: http://auth-server:9527/oauth/token_key
+        key-value: blog
+
+

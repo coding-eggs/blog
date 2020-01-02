@@ -1,5 +1,7 @@
 server:
   port: 9527
+  servlet:
+    context-path: /auth/server
 spring:
   application:
     name: auth-server
@@ -16,6 +18,11 @@ spring:
         max-active: 8
         max-idle: 8
         min-idle: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Ws961226
+    url: jdbc:mysql://101.37.174.133:1234/cloud_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
 eureka:
   instance:
     hostname: localhost
@@ -40,11 +47,35 @@ druid:
       username: root
       password: Ws961226
       driverClassName: com.mysql.cj.jdbc.Driver
+    datasource2:
+      url: jdbc:mysql://101.37.174.133:1234/cloud_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+      username: root
+      password: Ws961226
+      driverClassName: com.mysql.cj.jdbc.Driver
 
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+  type-aliases-package: com.cloud.blog.model;com.cloud.blog.auth.config.pojo
+  mapper-locations: classpath:mapper/*/*.xml
+  type-handlers-package: com.cloud.blog.auth.handler
 
+security:
+  remember:
+    time: 1209600
+  oauth2:
+    secret: blog
 
-
-
+logging:
+  level:
+    root: info
+    com:
+      cloud:
+        blog:
+          auth:
+            config: debug
+            mapper: debug
+    org:
+      springframework:
+        boot:
+          spring-cloud-starter-oauth2: debug

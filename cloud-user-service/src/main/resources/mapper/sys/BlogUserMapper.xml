@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.blog.user.mapper.sys.BlogUserMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.blog.model.po.sys.BlogUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="username" jdbcType="VARCHAR" property="username" />
+    <id column="identify_type" jdbcType="INTEGER" property="identifyType" />
+    <id column="credential" jdbcType="VARCHAR" property="credential" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="figure_url" jdbcType="VARCHAR" property="figureUrl" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="mail" jdbcType="VARCHAR" property="mail" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="last_password_reset_time" jdbcType="TIMESTAMP" property="lastPasswordResetTime" />
+    <result column="is_lock" jdbcType="TINYINT" property="isLock" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, identify_type, credential, nickname, birthday, figure_url, sex, phone,
+    mail, last_login_time, create_time, modify_time, last_password_reset_time, is_lock,
+    is_delete
+  </sql>
+
+  <select id="selectUserByUsername" resultType="com.cloud.blog.user.config.pojo.BaseSecurityUser">
+    select
+           id,
+           username,
+           identify_type,
+           credential,
+           nickname,
+           birthday,
+           figure_url,
+           sex,
+           phone,
+           mail,
+           last_login_time,
+           create_time,
+           modify_time,
+           last_password_reset_time,
+           is_lock,
+           is_delete
+    from blog_user
+    where is_delete = 0
+    and is_lock = 0
+    and username = #{username,jdbcType=VARCHAR}
+  </select>
+    <select id="selectCountUsername" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            blog_user
+        WHERE
+            is_delete = 0
+          AND  identify_type = #{identifyType,jdbcType=INTEGER}
+          AND username = #{username,jdbcType=VARCHAR}
+    </select>
+    <select id="selectQQLoginInfo" resultType="java.lang.Integer">
+        select
+            count(*)
+        from blog_user
+        where is_delete = 0
+          and is_lock = 0
+          and identify_type = #{identifyType,jdbcType=INTEGER}
+          and credential = #{openId,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insert" parameterType="com.cloud.blog.model.po.sys.BlogUser">
+    insert into blog_user (id, username, identify_type,
+      credential, nickname, birthday,
+      figure_url, sex, phone,
+      mail, last_login_time, create_time,
+      modify_time, last_password_reset_time,
+      is_lock, is_delete)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{identifyType,jdbcType=INTEGER},
+      #{credential,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
+      #{figureUrl,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR},
+      #{mail,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP},
+      #{modifyTime,jdbcType=TIMESTAMP}, #{lastPasswordResetTime,jdbcType=TIMESTAMP},
+      #{isLock,jdbcType=TINYINT}, #{isDelete,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.blog.model.po.sys.BlogUser">
+    insert into blog_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="identifyType != null">
+        identify_type,
+      </if>
+      <if test="credential != null">
+        credential,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="figureUrl != null">
+        figure_url,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="mail != null">
+        mail,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="lastPasswordResetTime != null">
+        last_password_reset_time,
+      </if>
+      <if test="isLock != null">
+        is_lock,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyType != null">
+        #{identifyType,jdbcType=INTEGER},
+      </if>
+      <if test="credential != null">
+        #{credential,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="figureUrl != null">
+        #{figureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPasswordResetTime != null">
+        #{lastPasswordResetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLock != null">
+        #{isLock,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+    <insert id="insertBlogUser">
+        insert into blog_user
+            (username,
+             identify_type,
+             credential,
+             nickname)
+             values (
+                  #{blogUser.username},
+                  #{blogUser.identifyType},
+                  #{blogUser.credential},
+                  #{blogUser.nickname}
+                         )
+    </insert>
+    <insert id="insertBlogUserPhone">
+        INSERT INTO blog_user ( username, identify_type, credential, nickname )
+        VALUES(
+                      (SELECT CONCAT('User',(SELECT next_value('rand_user')))),
+                      20,
+                      'Ws961226',
+                      '马永康'
+              )
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.cloud.blog.model.po.sys.BlogUser">
+    update blog_user
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="figureUrl != null">
+        figure_url = #{figureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null">
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPasswordResetTime != null">
+        last_password_reset_time = #{lastPasswordResetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isLock != null">
+        is_lock = #{isLock,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+      and username = #{username,jdbcType=VARCHAR}
+      and identify_type = #{identifyType,jdbcType=INTEGER}
+      and credential = #{credential,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.blog.model.po.sys.BlogUser">
+    update blog_user
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      figure_url = #{figureUrl,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      last_password_reset_time = #{lastPasswordResetTime,jdbcType=TIMESTAMP},
+      is_lock = #{isLock,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+      and username = #{username,jdbcType=VARCHAR}
+      and identify_type = #{identifyType,jdbcType=INTEGER}
+      and credential = #{credential,jdbcType=VARCHAR}
+  </update>
+</mapper>

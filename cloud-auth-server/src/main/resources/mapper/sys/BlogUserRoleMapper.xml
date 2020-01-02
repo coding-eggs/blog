@@ -10,7 +10,7 @@
     id, user_id, role_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from blog_user_role
     where id = #{id,jdbcType=BIGINT}
@@ -22,7 +22,7 @@
   <insert id="insert" parameterType="com.cloud.blog.model.po.sys.BlogUserRole">
     insert into blog_user_role (id, user_id, role_id
       )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=LONG}
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.cloud.blog.model.po.sys.BlogUserRole">

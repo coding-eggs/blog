@@ -1,0 +1,73 @@
+server:
+  port: 9001
+  servlet:
+    context-path: /user/service
+spring:
+  application:
+    name: user-service
+  security:
+    user:
+      name: ailuoli
+      password: 961226
+  redis:
+    database: 2
+    host: 101.37.174.133
+    port: 1235
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Ws961226
+    url: jdbc:mysql://101.37.174.133:1234/cloud_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:8761/eureka/   #\u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u5730\u5740
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.cloud.blog.model;com.cloud.blog.auth.config.pojo
+  mapper-locations: classpath:mapper/*/*.xml
+  type-handlers-package: com.cloud.blog.auth.handler
+
+security:
+
+  remember:
+    time: 1209600
+  oauth2:
+    client:
+      client-id: user-service
+      client-secret: Ws961226
+      user-authorization-uri: http://localhost:9527/auth/server/oauth/authorize
+      access-token-uri: http://localhost:9527/auth/server/oauth/token
+    resource:
+      token-info-uri: http://localhost:8080/oauth/check_token # 检查 token 是否有效
+    authorization:
+      check-token-access: http://localhost:9527/auth/server/oauth/check_token
+    secret: blog
+
+logging:
+  level:
+    root: info
+    com:
+      cloud:
+        blog:
+          auth:
+            config: debug
+            mapper: debug

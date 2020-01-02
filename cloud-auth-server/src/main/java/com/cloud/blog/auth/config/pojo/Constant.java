@@ -1,14 +1,9 @@
 package com.cloud.blog.auth.config.pojo;
 
 /**
- * @program: blog
- * @description:
- * @author: Ailuoli
- * @create: 2019-12-16 01:04
- **/
+ * Created by fp295 on 2018/4/16.
+ */
 public class Constant {
 
-    public static String USER_INFO="user_info";
-
+    public static String USER_INFO = "user_info";
 }
-

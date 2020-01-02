@@ -20,12 +20,12 @@
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, username, identify_type, credential, nickname, birthday, figure_url, sex, phone, 
-    mail, last_login_time, create_time, modify_time, last_password_reset_time, is_lock, 
+    id, username, identify_type, credential, nickname, birthday, figure_url, sex, phone,
+    mail, last_login_time, create_time, modify_time, last_password_reset_time, is_lock,
     is_delete
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from blog_user
     where id = #{id,jdbcType=BIGINT}
@@ -33,7 +33,7 @@
       and identify_type = #{identifyType,jdbcType=INTEGER}
       and credential = #{credential,jdbcType=VARCHAR}
   </select>
-  <select id="selectUserByUsername" resultType="com.cloud.blog.model.po.sys.BlogUser">
+  <select id="selectUserByUsername" resultType="com.cloud.blog.auth.config.pojo.BaseSecurityUser">
     select
            id,
            username,
@@ -56,7 +56,16 @@
     and is_lock = 0
     and username = #{username,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="map">
+    <select id="selectQQLoginInfo" resultType="java.lang.Integer">
+        select
+            count(*)
+        from blog_user
+        where is_delete = 0
+          and is_lock = 0
+          and identify_type = #{identifyType,jdbcType=INTEGER}
+          and credential = #{openId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
     delete from blog_user
     where id = #{id,jdbcType=BIGINT}
       and username = #{username,jdbcType=VARCHAR}
@@ -64,17 +73,17 @@
       and credential = #{credential,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.cloud.blog.model.po.sys.BlogUser">
-    insert into blog_user (id, username, identify_type, 
-      credential, nickname, birthday, 
-      figure_url, sex, phone, 
-      mail, last_login_time, create_time, 
-      modify_time, last_password_reset_time, 
+    insert into blog_user (id, username, identify_type,
+      credential, nickname, birthday,
+      figure_url, sex, phone,
+      mail, last_login_time, create_time,
+      modify_time, last_password_reset_time,
       is_lock, is_delete)
-    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{identifyType,jdbcType=INTEGER}, 
-      #{credential,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{figureUrl,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, 
-      #{mail,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifyTime,jdbcType=TIMESTAMP}, #{lastPasswordResetTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{identifyType,jdbcType=INTEGER},
+      #{credential,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
+      #{figureUrl,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR},
+      #{mail,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP},
+      #{modifyTime,jdbcType=TIMESTAMP}, #{lastPasswordResetTime,jdbcType=TIMESTAMP},
       #{isLock,jdbcType=TINYINT}, #{isDelete,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.cloud.blog.model.po.sys.BlogUser">

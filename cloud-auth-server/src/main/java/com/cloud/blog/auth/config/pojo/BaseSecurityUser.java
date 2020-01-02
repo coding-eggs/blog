@@ -1,67 +1,58 @@
 package com.cloud.blog.auth.config.pojo;
 
+import com.cloud.blog.model.po.sys.BlogRole;
 import com.cloud.blog.model.po.sys.BlogUser;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.security.core.CredentialsContainer;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
- * @program: blog
- * @description:
- * @author: Ailuoli
- * @create: 2019-12-13 01:03
+ * @ClassName BaseSecurityUser
+ * @Description security user
+ * @Author wsail
+ * @Date 2019/12/17 11:07
  **/
 @Data
-@AllArgsConstructor
-public class BaseSecurityUser implements UserDetails,CredentialsContainer {
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
+public class BaseSecurityUser extends BlogUser implements UserDetails, Serializable {
 
-    private User user;
 
-    private BlogUser blogUser;
-
-        @Override
-    public void eraseCredentials() {
-        user.eraseCredentials();
-    }
+    private List<BlogRole> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities();
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return user.getUsername();
+        return super.getCredential();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return user.isAccountNonExpired();
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return user.isAccountNonLocked();
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return user.isCredentialsNonExpired();
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return user.isEnabled();
+        return true;
     }
 }
-

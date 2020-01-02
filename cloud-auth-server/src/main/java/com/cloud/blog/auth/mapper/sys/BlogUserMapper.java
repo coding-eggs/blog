@@ -1,5 +1,6 @@
 package com.cloud.blog.auth.mapper.sys;
 
+import com.cloud.blog.auth.config.pojo.BaseSecurityUser;
 import com.cloud.blog.model.po.sys.BlogUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,5 +21,7 @@ public interface BlogUserMapper {
 
     int updateByPrimaryKey(BlogUser record);
 
-    BlogUser selectUserByUsername(@Param("username") String username);
+    BaseSecurityUser selectUserByUsername(@Param("username") String username);
+
+    int selectQQLoginInfo(@Param("openId") String openId,@Param("identifyType") Integer identifyType);
 }
