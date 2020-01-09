@@ -57,7 +57,7 @@ security:
       user-authorization-uri: http://localhost:9527/auth/server/oauth/authorize
       access-token-uri: http://localhost:9527/auth/server/oauth/token
     resource:
-      token-info-uri: http://localhost:8080/oauth/check_token # 检查 token 是否有效
+      token-info-uri: http://localhost:9527/oauth/check_token # 检查 token 是否有效
     authorization:
       check-token-access: http://localhost:9527/auth/server/oauth/check_token
     secret: blog

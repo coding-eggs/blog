@@ -37,6 +37,7 @@ import java.util.List;
  * @Author wsail
  * @Date 2019/12/17 11:18
  **/
+@Order(2)
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -93,19 +94,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-
-
-//        //配置tokenService 参数
-//        DefaultTokenServices tokenServices = new DefaultTokenServices();
-//        tokenServices.setTokenStore(jwtTokenStore);
-//        tokenServices.setSupportRefreshToken(true);
-//        tokenServices.setClientDetailsService(getJdbcClientDetailsService());
-//        tokenServices.setTokenEnhancer(enhancerChain);
-//        tokenServices.setAccessTokenValiditySeconds(7200);
-
         // 普通jwt 模式 支持password 模式
         endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(baseUserDetailsService)
+//                .userDetailsService(baseUserDetailsService)
                 .tokenStore(jwtTokenStore);
         endpoints.tokenServices(defaultTokenServices());
     }

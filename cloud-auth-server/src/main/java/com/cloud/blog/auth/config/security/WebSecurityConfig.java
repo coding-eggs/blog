@@ -1,7 +1,10 @@
 package com.cloud.blog.auth.config.security;
 
 import com.cloud.blog.auth.filter.QQAuthenticationFilter;
-import com.cloud.blog.auth.handler.*;
+import com.cloud.blog.auth.handler.FuryAuthFailureHandler;
+import com.cloud.blog.auth.handler.FuryAuthSuccessHandler;
+import com.cloud.blog.auth.handler.FuryLogoutSuccessHandler;
+import com.cloud.blog.auth.handler.RestAuthAccessDeniedHandler;
 import com.cloud.blog.auth.mapper.sys.BlogUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +34,7 @@ import javax.sql.DataSource;
  * @Date 2019/12/17 10:36
  **/
 
-@Order(1)
+@Order(2)
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -118,18 +121,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 .authorizeRequests()
-                .antMatchers("/oauth/**","/security/login","/session/invalid","/security/logout").permitAll()
+                .antMatchers("/oauth/authorize","/security/**").permitAll()
+                .antMatchers("/js/**","/html/**","/img/**","/font/**","/css/**","/layer/**").permitAll()
                 .anyRequest()
-                .access("@securityAuthorityDecision.hasPermission(request,authentication)")
+                .authenticated()
+//                .access("@securityAuthorityDecision.hasPermission(request,authentication)")
                 .and()
-//                .addFilterAt(qqAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .formLogin()
-//                //设置登录页
-//                .loginPage("/html/login.html")
-                //设置登录接口名
-                .loginProcessingUrl("/security/login")
-                .successHandler(furyAuthSuccessHandler)
-                .failureHandler(furyAuthFailureHandler)
+                .addFilterAt(qqAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .formLogin().loginPage("/html/login.html").permitAll()
                 .and()
                 .logout().logoutUrl("/security/logout")
                 .logoutSuccessHandler(logoutSuccessHandler)
@@ -146,14 +146,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin();
     }
 
-//    /**
-//     * 自定义 QQ登录 过滤器
-//     */
-//    private QQAuthenticationFilter qqAuthenticationFilter() {
-//        QQAuthenticationFilter authenticationFilter = new QQAuthenticationFilter("/qqlogin/success");
-//        authenticationFilter.setAuthenticationSuccessHandler(furyAuthSuccessHandler);
-//        authenticationFilter.setAuthenticationManager(new QQAuthenticationManager(blogUserMapper));
-//        return authenticationFilter;
-//    }
+
+    private SecurityUsernamePasswordAuthenticationFilter authenticationFilter() throws Exception {
+        SecurityUsernamePasswordAuthenticationFilter filter = new SecurityUsernamePasswordAuthenticationFilter();
+        filter.setAuthenticationManager(authenticationManagerBean());
+        return filter;
+    }
+    /**
+     * 自定义 QQ登录 过滤器
+     */
+    private QQAuthenticationFilter qqAuthenticationFilter() {
+        QQAuthenticationFilter authenticationFilter = new QQAuthenticationFilter("/qqlogin/success");
+        authenticationFilter.setAuthenticationSuccessHandler(furyAuthSuccessHandler);
+        authenticationFilter.setAuthenticationManager(new QQAuthenticationManager(blogUserMapper));
+        return authenticationFilter;
+    }
 
 }
