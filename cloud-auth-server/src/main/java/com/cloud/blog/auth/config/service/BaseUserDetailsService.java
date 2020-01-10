@@ -39,6 +39,7 @@ public class BaseUserDetailsService implements UserDetailsService {
         if(user == null){
             throw new UsernameNotFoundException("can not find this user  ,username: "+ s);
         }
+        System.out.println(user.getPassword());
         //根据用户id 获取角色列表
         List<BlogRole> roleList = blogRoleMapper.selectRoleListByUserId(user.getId());
         user.setAuthorities(roleList);

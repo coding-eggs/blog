@@ -37,7 +37,6 @@ public class JwtTokenConfig {
         // 导入证书
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("ailuoli.jks"), "Ws961226".toCharArray());
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("ailuoli"));
-
         return converter;
     }
 

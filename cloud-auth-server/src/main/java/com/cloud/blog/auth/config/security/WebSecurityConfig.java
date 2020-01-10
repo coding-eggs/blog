@@ -15,10 +15,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -34,13 +35,13 @@ import javax.sql.DataSource;
  * @Date 2019/12/17 10:36
  **/
 
-@Order(2)
+@Order(1)
 @Configuration
-@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
+
 
     @Autowired
     private UserDetailsService baseUserDetailsService;
@@ -51,6 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${security.remember.time}")
     private Integer rememberTime;
+
+    @Value("${security.oauth2.secret}")
+    private String secret;
+
 
     /*
      自定义登录成功处理器
@@ -88,6 +93,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new Pbkdf2PasswordEncoder(secret);
+    }
 
     @Bean
     @Primary
@@ -105,7 +114,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      **/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(baseUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(baseUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     /**
@@ -117,19 +126,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable() //关闭CSRF
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                .and()
                 .authorizeRequests()
                 .antMatchers("/oauth/authorize","/security/**").permitAll()
                 .antMatchers("/js/**","/html/**","/img/**","/font/**","/css/**","/layer/**").permitAll()
                 .anyRequest()
-                .authenticated()
-//                .access("@securityAuthorityDecision.hasPermission(request,authentication)")
+                .access("@securityAuthorityDecision.hasPermission(request,authentication)")
                 .and()
                 .addFilterAt(qqAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .formLogin().loginPage("/html/login.html").permitAll()
+                .loginProcessingUrl("/security/login")
                 .and()
                 .logout().logoutUrl("/security/logout")
                 .logoutSuccessHandler(logoutSuccessHandler)
@@ -144,14 +149,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().invalidSessionUrl("/session/invalid");
         http
                 .headers().frameOptions().sameOrigin();
+
     }
 
-
-    private SecurityUsernamePasswordAuthenticationFilter authenticationFilter() throws Exception {
-        SecurityUsernamePasswordAuthenticationFilter filter = new SecurityUsernamePasswordAuthenticationFilter();
-        filter.setAuthenticationManager(authenticationManagerBean());
-        return filter;
-    }
     /**
      * 自定义 QQ登录 过滤器
      */

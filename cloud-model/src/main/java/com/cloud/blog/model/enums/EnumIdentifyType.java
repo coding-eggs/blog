@@ -13,7 +13,7 @@ import java.util.Map;
  * @return
  **/
 @Getter
-public enum EnumIdentifyType {
+public enum EnumIdentifyType  {
 
     LOGIN_IDENTIFY_LOCAL(10,"本系统登录"),
     LOGIN_IDENTIFY_QQ(20,"QQ登录"),

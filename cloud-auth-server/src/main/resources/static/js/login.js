@@ -1,5 +1,5 @@
 
-var hostname = "//"+ location.hostname+":9527/auth/server/";
+var hostname = "http://127.0.0.1:9527/auth/server";
 
 
 //监控当前分辨率
@@ -50,7 +50,7 @@ $(function () {
         if (!remember)
             remember = false;
         $.ajax({
-            url:hostname+ "/auth/login",
+            url:hostname+ "/security/login",
             type: "POST",
             // contentType: "application/json;charset=UTF-8",
             data: {
