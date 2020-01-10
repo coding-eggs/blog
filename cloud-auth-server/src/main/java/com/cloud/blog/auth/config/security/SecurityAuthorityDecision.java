@@ -62,7 +62,6 @@ public class SecurityAuthorityDecision {
         throw new BlogException(EnumReturnCode.POWER_ACCESS_UNDEFINE);
     }
 
-
     public Collection<ConfigAttribute> getAttribute(HttpServletRequest request) {
 
         Collection<ConfigAttribute> roles = new ArrayList<>();
