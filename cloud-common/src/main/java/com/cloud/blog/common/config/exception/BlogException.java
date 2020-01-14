@@ -23,3 +23,4 @@ public class BlogException extends RuntimeException {
         return returnCode;
     }
 }
+

@@ -12,7 +12,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,6 +26,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.web.cors.CorsUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -63,23 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private FuryAuthSuccessHandler furyAuthSuccessHandler;
 
-    /**
-     * 自定义登录失败处理器
-     */
-    @Autowired
-    private FuryAuthFailureHandler furyAuthFailureHandler;
 
-    /**
-     * 自定义的注销成功的处理器
-     */
-    @Autowired
-    private FuryLogoutSuccessHandler logoutSuccessHandler;
-
-    /**
-     * 自定义注册没有权限的处理器
-     */
-    @Autowired
-    private RestAuthAccessDeniedHandler restAuthAccessDeniedHandler;
 
     /*
 配置TokenRepository
@@ -96,6 +84,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new Pbkdf2PasswordEncoder(secret);
+    }
+
+    @Bean
+    public AuthenticationProvider daoAuthenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(baseUserDetailsService);
+        daoAuthenticationProvider.setHideUserNotFoundExceptions(false);
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        return daoAuthenticationProvider;
     }
 
     @Bean
@@ -125,28 +122,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable() //关闭CSRF
+                .cors()
+                .and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/oauth/authorize","/security/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/security/**","/oauth/**","/actuator/**").permitAll()
                 .antMatchers("/js/**","/html/**","/img/**","/font/**","/css/**","/layer/**").permitAll()
                 .anyRequest()
                 .access("@securityAuthorityDecision.hasPermission(request,authentication)")
                 .and()
                 .addFilterAt(qqAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .formLogin().loginPage("/html/login.html").permitAll()
+                .formLogin().loginPage("/html/login.html")
                 .loginProcessingUrl("/security/login")
                 .and()
                 .logout().logoutUrl("/security/logout")
-                .logoutSuccessHandler(logoutSuccessHandler)
-                .and()
-                .exceptionHandling().accessDeniedHandler(restAuthAccessDeniedHandler)
                 .and()
                 .rememberMe()
                 .tokenRepository(persistentTokenRepository())
                 //两个星期
                 .tokenValiditySeconds(rememberTime);
-        http
-                .sessionManagement().invalidSessionUrl("/session/invalid");
         http
                 .headers().frameOptions().sameOrigin();
 

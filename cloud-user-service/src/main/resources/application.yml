@@ -42,7 +42,7 @@ management:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-  type-aliases-package: com.cloud.blog.model;com.cloud.blog.auth.config.pojo
+  type-aliases-package: com.cloud.blog.model;com.cloud.blog.user.config.pojo
   mapper-locations: classpath:mapper/*/*.xml
   type-handlers-package: com.cloud.blog.auth.handler
 
@@ -56,6 +56,8 @@ security:
       client-secret: Ws961226
       user-authorization-uri: http://localhost:9527/auth/server/oauth/authorize
       access-token-uri: http://localhost:9527/auth/server/oauth/token
+      registered-redirect-uri: http://127.0.0.1:9001/user/service/oauth/callback
+      authorized-grant-types: authorization_code
     resource:
       token-info-uri: http://localhost:9527/oauth/check_token # 检查 token 是否有效
     authorization:

@@ -9,7 +9,7 @@ import com.cloud.blog.user.mapper.sys.BlogUserMapper;
 import com.cloud.blog.user.service.IBlogUserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,6 +24,8 @@ public class BlogUserServiceImpl implements IBlogUserService {
     @Autowired
     private BlogUserMapper blogUserMapper;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public boolean addBlogUser(BaseSecurityUser user) {
@@ -39,7 +41,7 @@ public class BlogUserServiceImpl implements IBlogUserService {
                 throw new BlogException(EnumReturnCode.USERNAME_IS_EXIST);
             }
             //插入前对密码进行加密
-            user.setCredential(new BCryptPasswordEncoder().encode(user.getPassword()));
+            user.setCredential(passwordEncoder.encode(user.getPassword()));
         }
         return blogUserMapper.insertBlogUser(user) > 0;
     }

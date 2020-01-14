@@ -87,7 +87,7 @@
         <hr style="background-color: #aaceff">
         <input type="password" name="password" id="phpassword" style="border: 0;width: 100%;font-size: 15px"
                placeholder="密码">
-        <hr style="background-color: #aaceff">
+        <hr style="background-color: #aaceff">pcusername
         <p style="font-size:13px">
             没有账户?
             <a href="/user/registered">创建一个!</a>
@@ -103,8 +103,13 @@
         <div align="left">
             <a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101583722&redirect_uri=../qqlogin/success&state=test"><img style="width: 35px;" src="../img/qq%20(2).jpg" alt="QQ登录"></a>
         </div>
-
     </div>
+    <form id="loginInfoForm" action="http://127.0.0.1:9527/auth/server/security/login" method="post" enctype="">
+        <input type="hidden" id="username" name="username">
+        <input type="hidden" id="password" name="password">
+        <input type="hidden" id="remember-me" name="remember-me">
+    </form>
+
 </div>
 
 </body>

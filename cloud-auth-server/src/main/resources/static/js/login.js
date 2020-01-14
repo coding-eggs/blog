@@ -46,33 +46,18 @@ $(function () {
     $("#pcsub").click(function () {
         var username = $("#pcusername").val();
         var password = $("#pcpassword").val();
-        var remember = $("#pcrem").is(":checked");
+        var remember = $("#rem").is(":checked");
         if (!remember)
             remember = false;
-        $.ajax({
-            url:hostname+ "/security/login",
-            type: "POST",
-            // contentType: "application/json;charset=UTF-8",
-            data: {
-                "username":username,
-                "password":password,
-                "remember-me":remember
-            },
-            beforeSend: function () {
-                //注意，layer.msg默认3秒自动关闭，如果数据加载耗时比较长，需要设置time
-                loadingFlag= layer.msg('登录……', { icon: 16, shade: 0.01,shadeClose:false,time:60000 });
-            },
-            success: function (data) {
-                layer.close(loadingFlag);
-                if(data.data == null) {
-                    layer.alert("用户名或密码错误",{icon:5});
-                    return;
-                }
-                localStorage.setItem("userDetails",JSON.stringify(data.data));
-                window.location.href=data.requestURI;
-            }
-        })
-
+        var userPWD = {
+            "username" :username,
+            "password" :password,
+            "remember-me": remember
+        };
+        $("#username").val(username);
+        $("#password").val(password);
+        $("#remember-me").val(remember);
+        $("#loginInfoForm").submit();
     });
 
     $(document).keydown(function (event) {
@@ -88,32 +73,13 @@ $(function () {
         var remember = $("#rem").is(":checked");
         if (!remember)
             remember = false;
-        $.ajax({
-            url: hostname+"/auth/login",
-            type: "POST",
-            // contentType: "application/json;charset=UTF-8",
-            data: {
-                "username":username,
-                "password":password,
-                "remember-me":remember
-            },
-            beforeSend: function () {
-                //注意，layer.msg默认3秒自动关闭，如果数据加载耗时比较长，需要设置time
-                loadingFlag= layer.msg('登录……', { icon: 16, shade: 0.01,shadeClose:false,time:60000 });
-            },
-            success: function (data) {
-
-                if(data.data == null) {
-                    layer.alert("用户名或密码错误",{icon:5});
-                    return;
-                }
-                localStorage.setItem("userDetails",data.data);
-                localStorage.setItem("sessionId",data.sessionId);
-                window.location.href=data.requestURI;
-                layer.close(loadingFlag);
-            }
-        })
-
+        var userPWD = {
+            "username" :username,
+            "password" :password,
+            "remember-me": remember
+        };
+        $("#loginInfo").val(JSON.stringify(userPWD));
+        $("#loginInfoForm").submit();
     })
 
 });

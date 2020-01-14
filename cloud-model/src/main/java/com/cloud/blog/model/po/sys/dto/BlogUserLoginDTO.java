@@ -1,6 +1,5 @@
 package com.cloud.blog.model.po.sys.dto;
 
-import com.cloud.blog.model.po.sys.jwt.JWT;
 import lombok.Data;
 import org.springframework.security.core.userdetails.User;
 
@@ -13,7 +12,6 @@ import org.springframework.security.core.userdetails.User;
 @Data
 public class BlogUserLoginDTO {
 
-    private JWT jwt;
 
     private User user;
 

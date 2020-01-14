@@ -1,4 +1,4 @@
-package com.cloud.blog.model.po.sys.jwt;
+package com.cloud.blog.user.config.pojo;
 
 import lombok.Data;
 
@@ -18,11 +18,12 @@ public class JWT {
 
     private String refresh_token;
 
+    private BaseSecurityUser user_info;
+
     private int expires_in;
 
     private String scope;
 
     private String jti;
-
 
 }

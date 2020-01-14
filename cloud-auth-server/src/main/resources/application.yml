@@ -39,19 +39,6 @@ management:
     health:
       show-details: always
 
-druid:
-  datasource:
-    defaultName: datasource1
-    datasource1:
-      url: jdbc:mysql://101.37.174.133:1234/cloud_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
-      username: root
-      password: Ws961226
-      driverClassName: com.mysql.cj.jdbc.Driver
-    datasource2:
-      url: jdbc:mysql://101.37.174.133:1234/cloud_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
-      username: root
-      password: Ws961226
-      driverClassName: com.mysql.cj.jdbc.Driver
 
 mybatis:
   configuration:

@@ -8327,7 +8327,7 @@ jQuery.fn.extend( {
 			jQuery.event.trigger( type, data, this );
 		} );
 	},
-	triggerHandler: function( type, data ) {
+	ztriggerHandler: function( type, data ) {
 		var elem = this[ 0 ];
 		if ( elem ) {
 			return jQuery.event.trigger( type, data, elem, true );
