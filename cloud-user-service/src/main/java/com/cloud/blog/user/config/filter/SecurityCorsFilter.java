@@ -15,8 +15,8 @@ import java.io.IOException;
  * @Author wsail
  * @Date 2020/1/13 15:52
  **/
-@Order(Ordered.HIGHEST_PRECEDENCE)
-@Configuration
+//@Order(Ordered.HIGHEST_PRECEDENCE)
+//@Configuration
 public class SecurityCorsFilter implements Filter {
 
 

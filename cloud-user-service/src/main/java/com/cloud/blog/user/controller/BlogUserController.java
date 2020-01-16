@@ -36,7 +36,6 @@ public class BlogUserController {
     }
 
     @GetMapping(value = "/get")
-    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public Object get(Authentication authentication){
         //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -45,5 +44,18 @@ public class BlogUserController {
         String token = details.getTokenValue();
         return token;
     }
+
+    @GetMapping(value = "/hello")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String hello(){
+        return "hello";
+    }
+    @GetMapping(value = "/test")
+
+    public String test(){
+        return " test hello";
+    }
+
+
 
 }

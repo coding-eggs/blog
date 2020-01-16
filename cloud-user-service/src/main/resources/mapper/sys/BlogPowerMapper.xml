@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.blog.user.mapper.sys.BlogPowerMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.blog.model.po.sys.BlogPower">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="power_type" jdbcType="VARCHAR" property="powerType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, power_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from blog_power
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectOperationPowerList" resultType="com.cloud.blog.model.po.sys.dto.BlogDecisionDTO">
+        SELECT
+            br.role_name,
+            bo.pre_resource_mapping
+        FROM
+            blog_role_power rp
+                INNER JOIN blog_role br ON rp.role_id = br.id
+                INNER JOIN blog_operation_power rop ON rp.power_id = rop.power_id
+                INNER JOIN blog_operation bo ON rop.operation_id = bo.id
+        ORDER BY role_name
+    </select>
+    <select id="selectPagePowerList" resultType="com.cloud.blog.model.po.sys.dto.BlogDecisionDTO">
+        SELECT
+            br.role_name,
+            bp.page_element_name
+        FROM
+            blog_role_power rp
+                INNER JOIN blog_role br ON rp.role_id = br.id
+                INNER JOIN blog_page_power bpp ON rp.power_id = bpp.power_id
+                INNER JOIN blog_page bp ON bpp.page_id = bp.id;
+    </select>
+    <select id="selectFilePowerList" resultType="com.cloud.blog.model.po.sys.dto.BlogDecisionDTO">
+        SELECT
+            br.role_name,
+            bf.file_url
+        FROM blog_role_power rp
+                 INNER JOIN blog_role br ON rp.role_id = br.id
+                 INNER JOIN blog_file_power bfp ON rp.power_id = bfp.power_id
+                 INNER JOIN blog_file bf ON bfp.file_id = bf.id;
+
+    </select>
+    <select id="selectMenuPowerList" resultType="com.cloud.blog.model.po.sys.dto.BlogDecisionDTO">
+        SELECT
+            br.role_name,
+            bm.menu_url
+        FROM blog_role_power rp
+                 INNER JOIN blog_role br ON rp.role_id = br.id
+                 INNER JOIN blog_menu_power bmp ON rp.power_id = bmp.power_id
+                 INNER JOIN blog_menu bm ON bmp.menu_id = bm.id;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_power
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.blog.model.po.sys.BlogPower">
+    insert into blog_power (id, power_type)
+    values (#{id,jdbcType=INTEGER}, #{powerType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.blog.model.po.sys.BlogPower">
+    insert into blog_power
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="powerType != null">
+        power_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="powerType != null">
+        #{powerType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.blog.model.po.sys.BlogPower">
+    update blog_power
+    <set>
+      <if test="powerType != null">
+        power_type = #{powerType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.blog.model.po.sys.BlogPower">
+    update blog_power
+    set power_type = #{powerType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

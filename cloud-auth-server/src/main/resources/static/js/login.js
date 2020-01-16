@@ -44,20 +44,17 @@ $(window).resize(function () {
 $(function () {
     var loadingFlag;
     $("#pcsub").click(function () {
-        var username = $("#pcusername").val();
-        var password = $("#pcpassword").val();
-        var remember = $("#rem").is(":checked");
+        const username = $("#pcusername").val();
+        const password = $("#pcpassword").val();
+        let remember = $("#rem").is(":checked");
         if (!remember)
             remember = false;
-        var userPWD = {
-            "username" :username,
-            "password" :password,
-            "remember-me": remember
-        };
         $("#username").val(username);
         $("#password").val(password);
         $("#remember-me").val(remember);
         $("#loginInfoForm").submit();
+        const loadingFlag = layer.msg('登录……', {icon: 16, shade: 0.01, shadeClose: false, time: 60000});
+
     });
 
     $(document).keydown(function (event) {
@@ -68,18 +65,16 @@ $(function () {
 
 
     $("#phsub").click(function () {
-        var username = $("#phusername").val();
-        var password = $("#phpassword").val();
-        var remember = $("#rem").is(":checked");
+        const username = $("#phusername").val();
+        const password = $("#phpassword").val();
+        let remember = $("#rem").is(":checked");
         if (!remember)
             remember = false;
-        var userPWD = {
-            "username" :username,
-            "password" :password,
-            "remember-me": remember
-        };
-        $("#loginInfo").val(JSON.stringify(userPWD));
+        $("#username").val(username);
+        $("#password").val(password);
+        $("#remember-me").val(remember);
         $("#loginInfoForm").submit();
+        const loadingFlag = layer.msg('登录……', {icon: 16, shade: 0.01, shadeClose: false, time: 60000});
     })
 
 });

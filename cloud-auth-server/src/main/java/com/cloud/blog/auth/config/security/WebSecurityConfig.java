@@ -1,10 +1,7 @@
 package com.cloud.blog.auth.config.security;
 
 import com.cloud.blog.auth.filter.QQAuthenticationFilter;
-import com.cloud.blog.auth.handler.FuryAuthFailureHandler;
 import com.cloud.blog.auth.handler.FuryAuthSuccessHandler;
-import com.cloud.blog.auth.handler.FuryLogoutSuccessHandler;
-import com.cloud.blog.auth.handler.RestAuthAccessDeniedHandler;
 import com.cloud.blog.auth.mapper.sys.BlogUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,15 +17,12 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.web.cors.CorsUtils;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 
@@ -125,10 +119,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS,"/security/**","/oauth/**","/actuator/**").permitAll()
+
+                .antMatchers("/security/login","/blog/user_info","/security/logout","/oauth/**","/actuator/**").permitAll()
                 .antMatchers("/js/**","/html/**","/img/**","/font/**","/css/**","/layer/**").permitAll()
                 .anyRequest()
-                .access("@securityAuthorityDecision.hasPermission(request,authentication)")
+                .authenticated()
+//                .access("@securityAuthorityDecision.hasPermission(request,authentication)")
                 .and()
                 .addFilterAt(qqAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .formLogin().loginPage("/html/login.html")

@@ -21,6 +21,7 @@ public enum EnumReturnCode {
 
     USERNAME_IS_EMPTY(10002,"用户名为空"),
     USERNAME_IS_EXIST(10003,"用户名已存在"),
+    INVALID_ACCESS_TOKEN(10004,"invalid access_token"),
 
 
 

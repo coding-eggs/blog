@@ -1,0 +1,515 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (vmThread.cpp:659), pid=14536, tid=0x0000000000005010
+#  fatal error: Nested VM operation CollectForMetadataAllocation requested by operation ChangeBreakpoints
+#
+# JRE version: OpenJDK Runtime Environment (8.0_222-b10) (build 1.8.0_222-4-redhat-b10)
+# Java VM: OpenJDK 64-Bit Server VM (25.222-b10 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000000001c877800):  VMThread [stack: 0x000000001e9e0000,0x000000001eae0000] [id=20496]
+
+Stack: [0x000000001e9e0000,0x000000001eae0000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+VM_Operation (0x000000001f03f660): ChangeBreakpoints, mode: safepoint, requested by thread 0x000000001d777800
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00000000216d4800 JavaThread "Thread-8" daemon [_thread_blocked, id=17968, stack(0x0000000022330000,0x0000000022430000)]
+  0x00000000216d9000 JavaThread "pool-3-thread-1" daemon [_thread_blocked, id=1776, stack(0x0000000022230000,0x0000000022330000)]
+  0x00000000216d8800 JavaThread "rebel-change-detector-thread" daemon [_thread_blocked, id=13948, stack(0x0000000022110000,0x0000000022210000)]
+  0x00000000216d5800 JavaThread "rebel-debugger-thread" daemon [_thread_blocked, id=10292, stack(0x0000000020a40000,0x0000000020b40000)]
+  0x00000000216d7800 JavaThread "rebel-debugger-attach-notifier" daemon [_thread_blocked, id=18120, stack(0x0000000020940000,0x0000000020a40000)]
+  0x00000000216d1800 JavaThread "rebel-heartbeat-thread" daemon [_thread_blocked, id=9892, stack(0x0000000020640000,0x0000000020740000)]
+  0x000000001f4e0000 JavaThread "rebel-redeploy-thread" daemon [_thread_blocked, id=9964, stack(0x0000000020140000,0x0000000020240000)]
+  0x000000001f4e6800 JavaThread "rebel-init-licensing" daemon [_thread_blocked, id=16148, stack(0x0000000020040000,0x0000000020140000)]
+  0x000000001f4e2000 JavaThread "rebel-leaseManager-1" daemon [_thread_blocked, id=20024, stack(0x000000001ff40000,0x0000000020040000)]
+  0x000000001f4df800 JavaThread "rebel-weak-reaper" daemon [_thread_blocked, id=348, stack(0x000000001fc40000,0x000000001fd40000)]
+  0x000000001f4e3800 JavaThread "rebel-fsnotify-OutputReader" daemon [_thread_blocked, id=7496, stack(0x0000000020540000,0x0000000020640000)]
+  0x000000001f4e4000 JavaThread "rebel-fsnotify-OutputReader" daemon [_thread_blocked, id=18760, stack(0x0000000020440000,0x0000000020540000)]
+  0x000000001f4e1000 JavaThread "rebel-fsnotify-ShutdownOnTermination" daemon [_thread_in_native, id=13448, stack(0x0000000020340000,0x0000000020440000)]
+  0x000000001f4e5800 JavaThread "rebel-logger" daemon [_thread_blocked, id=21760, stack(0x0000000021c10000,0x0000000021d10000)]
+  0x000000001f8fb000 JavaThread "rebel-CacheKeepAlive" daemon [_thread_blocked, id=22516, stack(0x0000000020240000,0x0000000020340000)]
+  0x000000001d788800 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=12148, stack(0x000000001f140000,0x000000001f240000)]
+  0x000000001d785000 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=17876, stack(0x000000001f040000,0x000000001f140000)]
+  0x000000001d777800 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_blocked, id=3720, stack(0x000000001ef40000,0x000000001f040000)]
+  0x000000001d74f000 JavaThread "Attach Listener" daemon [_thread_blocked, id=21384, stack(0x000000001ee40000,0x000000001ef40000)]
+  0x000000001d74e000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=17940, stack(0x000000001ed40000,0x000000001ee40000)]
+  0x000000001d6d6800 JavaThread "Finalizer" daemon [_thread_blocked, id=21960, stack(0x000000001ebe0000,0x000000001ece0000)]
+  0x000000001c87c800 JavaThread "Reference Handler" daemon [_thread_blocked, id=17728, stack(0x000000001eae0000,0x000000001ebe0000)]
+  0x0000000002a3a800 JavaThread "main" [_thread_blocked, id=14616, stack(0x0000000002a40000,0x0000000002b40000)]
+
+Other Threads:
+=>0x000000001c877800 VMThread [stack: 0x000000001e9e0000,0x000000001eae0000] [id=20496]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x0000000002b947e0] Threads_lock - owner thread: 0x000000001c877800
+
+heap address: 0x00000006c2000000, size: 4064 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x00000007c0000000
+
+Heap:
+ PSYoungGen      total 75776K, used 32880K [0x000000076b580000, 0x0000000770a00000, 0x00000007c0000000)
+  eden space 65024K, 35% used [0x000000076b580000,0x000000076cc47f50,0x000000076f500000)
+  from space 10752K, 88% used [0x000000076ff80000,0x00000007708d42b0,0x0000000770a00000)
+  to   space 10752K, 0% used [0x000000076f500000,0x000000076f500000,0x000000076ff80000)
+ ParOldGen       total 173568K, used 0K [0x00000006c2000000, 0x00000006cc980000, 0x000000076b580000)
+  object space 173568K, 0% used [0x00000006c2000000,0x00000006c2000000,0x00000006cc980000)
+ Metaspace       used 20193K, capacity 21132K, committed 21248K, reserved 1067008K
+  class space    used 2441K, capacity 2737K, committed 2816K, reserved 1048576K
+
+Card table byte_map: [0x00000000122d0000,0x0000000012ad0000] byte_map_base: 0x000000000ecc0000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000067d5a1b0
+ Begin Bits: [0x0000000013820000, 0x00000000177a0000)
+ End Bits:   [0x00000000177a0000, 0x000000001b720000)
+
+Polling page: 0x0000000000d50000
+
+CodeCache: size=245760Kb used=587Kb max_used=587Kb free=245172Kb
+ bounds [0x0000000002f10000, 0x0000000003180000, 0x0000000011f10000]
+ total_blobs=333 nmethods=9 adapters=298
+ compilation: enabled
+
+Compilation events (0 events):
+No events
+
+GC Heap History (4 events):
+Event: 2.969 GC heap before
+{Heap before GC invocations=1 (full 0):
+ PSYoungGen      total 75776K, used 65024K [0x000000076b580000, 0x0000000770a00000, 0x00000007c0000000)
+  eden space 65024K, 100% used [0x000000076b580000,0x000000076f500000,0x000000076f500000)
+  from space 10752K, 0% used [0x000000076ff80000,0x000000076ff80000,0x0000000770a00000)
+  to   space 10752K, 0% used [0x000000076f500000,0x000000076f500000,0x000000076ff80000)
+ ParOldGen       total 173568K, used 0K [0x00000006c2000000, 0x00000006cc980000, 0x000000076b580000)
+  object space 173568K, 0% used [0x00000006c2000000,0x00000006c2000000,0x00000006cc980000)
+ Metaspace       used 14113K, capacity 15032K, committed 15360K, reserved 1062912K
+  class space    used 1656K, capacity 1927K, committed 2048K, reserved 1048576K
+Event: 2.981 GC heap after
+Heap after GC invocations=1 (full 0):
+ PSYoungGen      total 75776K, used 8469K [0x000000076b580000, 0x0000000770a00000, 0x00000007c0000000)
+  eden space 65024K, 0% used [0x000000076b580000,0x000000076b580000,0x000000076f500000)
+  from space 10752K, 78% used [0x000000076f500000,0x000000076fd456f8,0x000000076ff80000)
+  to   space 10752K, 0% used [0x000000076ff80000,0x000000076ff80000,0x0000000770a00000)
+ ParOldGen       total 173568K, used 0K [0x00000006c2000000, 0x00000006cc980000, 0x000000076b580000)
+  object space 173568K, 0% used [0x00000006c2000000,0x00000006c2000000,0x00000006cc980000)
+ Metaspace       used 14113K, capacity 15032K, committed 15360K, reserved 1062912K
+  class space    used 1656K, capacity 1927K, committed 2048K, reserved 1048576K
+}
+Event: 6.631 GC heap before
+{Heap before GC invocations=2 (full 0):
+ PSYoungGen      total 75776K, used 73493K [0x000000076b580000, 0x0000000770a00000, 0x00000007c0000000)
+  eden space 65024K, 100% used [0x000000076b580000,0x000000076f500000,0x000000076f500000)
+  from space 10752K, 78% used [0x000000076f500000,0x000000076fd456f8,0x000000076ff80000)
+  to   space 10752K, 0% used [0x000000076ff80000,0x000000076ff80000,0x0000000770a00000)
+ ParOldGen       total 173568K, used 0K [0x00000006c2000000, 0x00000006cc980000, 0x000000076b580000)
+  object space 173568K, 0% used [0x00000006c2000000,0x00000006c2000000,0x00000006cc980000)
+ Metaspace       used 16603K, capacity 17580K, committed 17792K, reserved 1064960K
+  class space    used 2021K, capacity 2321K, committed 2432K, reserved 1048576K
+Event: 6.645 GC heap after
+Heap after GC invocations=2 (full 0):
+ PSYoungGen      total 75776K, used 9552K [0x000000076b580000, 0x0000000770a00000, 0x00000007c0000000)
+  eden space 65024K, 0% used [0x000000076b580000,0x000000076b580000,0x000000076f500000)
+  from space 10752K, 88% used [0x000000076ff80000,0x00000007708d42b0,0x0000000770a00000)
+  to   space 10752K, 0% used [0x000000076f500000,0x000000076f500000,0x000000076ff80000)
+ ParOldGen       total 173568K, used 0K [0x00000006c2000000, 0x00000006cc980000, 0x000000076b580000)
+  object space 173568K, 0% used [0x00000006c2000000,0x00000006c2000000,0x00000006cc980000)
+ Metaspace       used 16603K, capacity 17580K, committed 17792K, reserved 1064960K
+  class space    used 2021K, capacity 2321K, committed 2432K, reserved 1048576K
+}
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (7 events):
+Event: 2.706 Thread 0x000000001c877800 redefined class name=com.zeroturnaround.jrebelbase.facade.av, count=1
+Event: 2.710 Thread 0x000000001c877800 redefined class name=com.zeroturnaround.jrebelbase.facade.ap, count=1
+Event: 2.718 Thread 0x000000001c877800 redefined class name=com.zeroturnaround.jrebelbase.facade.a, count=1
+Event: 2.724 Thread 0x000000001c877800 redefined class name=com.zeroturnaround.jrebelbase.l, count=1
+Event: 2.731 Thread 0x000000001c877800 redefined class name=com.zeroturnaround.jrebelbase.facade.h, count=1
+Event: 2.735 Thread 0x000000001c877800 redefined class name=com.zeroturnaround.jrebelbase.facade.g, count=1
+Event: 2.740 Thread 0x000000001c877800 redefined class name=com.zeroturnaround.jrebelbase.facade.i, count=1
+
+Internal exceptions (23 events):
+Event: 0.091 Thread 0x0000000002a3a800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x000000076b5882d0) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\sh
+Event: 0.091 Thread 0x0000000002a3a800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x000000076b5885b8) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jni.c
+Event: 0.952 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ba33f28) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 0.952 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ba34138) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 0.955 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ba382b8) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 0.955 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ba384c8) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 0.956 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ba39cf8) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 0.956 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076ba39f08) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 1.464 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076be79920) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 1.464 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076be79b30) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 1.469 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076beba3d0) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 1.470 Thread 0x0000000002a3a800 Exception <a 'java/security/PrivilegedActionException'> (0x000000076beba5e0) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\prims\jvm.cpp, line 1512]
+Event: 1.680 Thread 0x000000001f7ee800 Exception <a 'java/lang/ClassNotFoundException': java/beans/StandardBeanInfo> (0x000000076c5c7a98) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 1.686 Thread 0x000000001f7ee800 Exception <a 'java/lang/ClassNotFoundException': com/sun/beans/AppContext> (0x000000076c5ed498) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 1.686 Thread 0x000000001f7ee800 Exception <a 'java/lang/ClassNotFoundException': com/sun/beans/AppContext> (0x000000076c5ed738) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 1.695 Thread 0x000000001f7ee800 Exception <a 'java/lang/ClassNotFoundException': com/sun/beans/introspect/ClassInfo> (0x000000076c614410) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 1.695 Thread 0x000000001f7ee800 Exception <a 'java/lang/ClassNotFoundException': com/sun/beans/introspect/ClassInfo> (0x000000076c6146c8) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 1.861 Thread 0x000000001f7ee800 Exception <a 'java/lang/ClassNotFoundException': com/ibm/oti/vm/VM> (0x000000076cf32e68) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 2.598 Thread 0x0000000002a3a800 Exception <a 'java/lang/ClassNotFoundException': jdk/internal/misc/Unsafe> (0x000000076edfde50) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 2.689 Thread 0x0000000002a3a800 Exception <a 'java/lang/ClassNotFoundException': java/lang/invoke/MethodHandleImpl$FieldAccessor> (0x000000076ef96398) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 6.744 Thread 0x0000000002a3a800 Exception <a 'java/lang/ClassNotFoundException': java/lang/Module> (0x000000076b6f4490) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 6.969 Thread 0x0000000002a3a800 Exception <a 'java/lang/ClassNotFoundException': com/ibm/oti/vm/VM> (0x000000076bb6c558) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+Event: 6.999 Thread 0x0000000002a3a800 Exception <a 'java/lang/ClassNotFoundException': java/lang/J9VMInternals> (0x000000076bbd3fe8) thrown at [C:\cygwin64\tmp\ojdkbuild\lookaside\java-1.8.0-openjdk\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 210]
+
+Events (250 events):
+Event: 8.069 loading class com/zeroturnaround/javarebel/bqi done
+Event: 8.069 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/l
+Event: 8.069 loading class com/zeroturnaround/javarebel/bqe
+Event: 8.069 loading class com/zeroturnaround/javarebel/bqe done
+Event: 8.069 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/l done
+Event: 8.069 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/n
+Event: 8.069 loading class com/zeroturnaround/javarebel/bqr
+Event: 8.070 loading class com/zeroturnaround/javarebel/bqr done
+Event: 8.070 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/n done
+Event: 8.070 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/conn/v
+Event: 8.071 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/conn/v done
+Event: 8.071 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/conn/aw
+Event: 8.071 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/conn/l
+Event: 8.071 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/conn/l done
+Event: 8.071 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/conn/aw done
+Event: 8.071 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/i
+Event: 8.072 loading class com/zeroturnaround/javarebel/bph
+Event: 8.072 loading class com/zeroturnaround/javarebel/bph done
+Event: 8.072 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/i done
+Event: 8.072 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/bc
+Event: 8.072 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/bc done
+Event: 8.072 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/ab
+Event: 8.073 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/t
+Event: 8.073 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/t done
+Event: 8.073 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/ab done
+Event: 8.073 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/d
+Event: 8.074 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/b
+Event: 8.074 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/b done
+Event: 8.074 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/d done
+Event: 8.074 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/i
+Event: 8.075 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/i done
+Event: 8.075 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/v
+Event: 8.075 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/k
+Event: 8.075 loading class com/zeroturnaround/javarebel/bqf
+Event: 8.075 loading class com/zeroturnaround/javarebel/bqf done
+Event: 8.075 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/k done
+Event: 8.075 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/v done
+Event: 8.076 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/aa
+Event: 8.076 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/aa done
+Event: 8.076 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/i
+Event: 8.076 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/i done
+Event: 8.076 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/conn/routing/a
+Event: 8.077 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/conn/routing/c
+Event: 8.077 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/conn/routing/c done
+Event: 8.077 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/conn/routing/a done
+Event: 8.077 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/l
+Event: 8.077 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/l done
+Event: 8.077 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/j
+Event: 8.077 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/c
+Event: 8.078 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/j done
+Event: 8.078 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/x
+Event: 8.078 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/c done
+Event: 8.078 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/x done
+Event: 8.078 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/ab
+Event: 8.078 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/ab done
+Event: 8.078 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/k
+Event: 8.079 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/k done
+Event: 8.079 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/e
+Event: 8.079 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/e done
+Event: 8.079 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/d
+Event: 8.079 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/d done
+Event: 8.079 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/f
+Event: 8.080 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/f done
+Event: 8.080 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/q
+Event: 8.080 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/q done
+Event: 8.080 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/p
+Event: 8.081 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/p done
+Event: 8.081 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/f
+Event: 8.081 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/f done
+Event: 8.081 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/t
+Event: 8.081 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/k
+Event: 8.081 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/k done
+Event: 8.082 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/t done
+Event: 8.082 loading class java/io/InterruptedIOException
+Event: 8.083 loading class java/io/InterruptedIOException done
+Event: 8.084 loading class java/net/UnknownHostException
+Event: 8.085 loading class java/net/UnknownHostException done
+Event: 8.085 loading class java/net/ConnectException
+Event: 8.086 loading class java/net/SocketException
+Event: 8.087 loading class java/net/SocketException done
+Event: 8.087 loading class java/net/ConnectException done
+Event: 8.087 loading class javax/net/ssl/SSLException
+Event: 8.089 loading class javax/net/ssl/SSLException done
+Event: 8.089 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/k
+Event: 8.090 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/k done
+Event: 8.090 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/g
+Event: 8.090 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/execchain/g done
+Event: 8.090 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/c
+Event: 8.090 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/auth/e
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/auth/e done
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/auth/f
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/auth/f done
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/c done
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/e
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/e done
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/z
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/z done
+Event: 8.091 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/ae
+Event: 8.092 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/ae done
+Event: 8.092 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/m
+Event: 8.092 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/auth/m done
+Event: 8.092 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/l
+Event: 8.092 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/cookie/i
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/cookie/i done
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/cookie/j
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/cookie/j done
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/l done
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/am
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/am done
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/p
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/p done
+Event: 8.093 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/q
+Event: 8.094 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/q done
+Event: 8.094 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/aa
+Event: 8.094 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/aa done
+Event: 8.094 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/w
+Event: 8.094 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/w done
+Event: 8.094 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/af
+Event: 8.095 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/cookie/af done
+Event: 8.095 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/h
+Event: 8.095 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/h
+Event: 8.095 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/h done
+Event: 8.095 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/h done
+Event: 8.095 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/cookie/d
+Event: 8.096 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/cookie/d done
+Event: 8.096 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/am
+Event: 8.096 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/m
+Event: 8.096 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/j
+Event: 8.096 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/j done
+Event: 8.096 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/m done
+Event: 8.096 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/impl/client/am done
+Event: 8.097 loading class com/zeroturnaround/javarebel/bjl
+Event: 8.097 Thread 0x00000000216d9000 Thread added: 0x00000000216d9000
+Event: 8.097 loading class com/zeroturnaround/jrebelbase/jpms/a
+Event: 8.097 loading class com/zeroturnaround/javarebel/bjl done
+Event: 8.097 loading class com/zeroturnaround/javarebel/bjm
+Event: 8.097 loading class com/zeroturnaround/jrebelbase/jpms/a done
+Event: 8.097 loading class com/zeroturnaround/javarebel/cl
+Event: 8.097 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/v
+Event: 8.098 loading class com/zeroturnaround/javarebel/cl done
+Event: 8.098 loading class com/zeroturnaround/javarebel/et
+Event: 8.098 loading class com/zeroturnaround/javarebel/bjm done
+Event: 8.098 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/v done
+Event: 8.098 loading class com/zeroturnaround/javarebel/et done
+Event: 8.098 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/x
+Event: 8.098 loading class com/zeroturnaround/javarebel/bjn
+Event: 8.098 loading class com/zeroturnaround/reload/y
+Event: 8.098 loading class com/zeroturnaround/reload/y done
+Event: 8.098 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/p
+Event: 8.098 loading class com/zeroturnaround/javarebel/bjn done
+Event: 8.098 loading class com/zeroturnaround/jrebelbase/util/h
+Event: 8.098 loading class com/zeroturnaround/javarebel/bjp
+Event: 8.099 loading class com/zeroturnaround/jrebelbase/util/h done
+Event: 8.099 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/f
+Event: 8.099 loading class com/zeroturnaround/jrebelbase/util/i
+Event: 8.099 loading class com/zeroturnaround/javarebel/bjp done
+Event: 8.099 loading class com/zeroturnaround/javarebel/bie
+Event: 8.099 loading class com/zeroturnaround/jrebelbase/util/i done
+Event: 8.099 loading class com/zeroturnaround/jrebelbase/util/j
+Event: 8.099 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/f done
+Event: 8.099 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/u
+Event: 8.099 loading class com/zeroturnaround/jrebelbase/util/j done
+Event: 8.099 loading class com/zeroturnaround/javarebel/bqa
+Event: 8.099 Thread 0x00000000216d4800 Thread added: 0x00000000216d4800
+Event: 8.099 loading class com/zeroturnaround/javarebel/bie done
+Event: 8.099 loading class com/zeroturnaround/javarebel/bpz
+Event: 8.099 loading class java/lang/InternalError
+Event: 8.099 loading class com/zeroturnaround/javarebel/bpz done
+Event: 8.099 loading class com/zeroturnaround/javarebel/bqa done
+Event: 8.099 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/u done
+Event: 8.099 loading class java/lang/InternalError done
+Event: 8.099 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/b
+Event: 8.099 loading class com/zeroturnaround/javarebel/bhn
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/a
+Event: 8.100 loading class com/zeroturnaround/javarebel/bhn done
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/a done
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/i
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/i done
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/message/a
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/message/a done
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/b done
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/p done
+Event: 8.100 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/x done
+Event: 8.101 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/message/s
+Event: 8.101 loading class com/zeroturnaround/javarebel/bjr
+Event: 8.101 loading class com/zeroturnaround/javarebel/bjr done
+Event: 8.101 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/message/s done
+Event: 8.101 loading class com/zeroturnaround/javarebel/bjs
+Event: 8.101 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/utils/k
+Event: 8.101 loading class com/zeroturnaround/javarebel/bjs done
+Event: 8.101 loading class com/zeroturnaround/javarebel/bjt
+Event: 8.102 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/utils/k done
+Event: 8.102 loading class com/zeroturnaround/javarebel/bjt done
+Event: 8.102 loading class com/zeroturnaround/javarebel/bpx
+Event: 8.102 loading class com/zeroturnaround/javarebel/bjq
+Event: 8.102 loading class com/zeroturnaround/javarebel/bjq done
+Event: 8.102 loading class com/zeroturnaround/javarebel/bjo
+Event: 8.102 loading class com/zeroturnaround/javarebel/bpx done
+Event: 8.102 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/q
+Event: 8.102 loading class com/zeroturnaround/javarebel/bjo done
+Event: 8.103 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/methods/q done
+Event: 8.103 loading class com/zeroturnaround/javarebel/bpu
+Event: 8.103 loading class com/zeroturnaround/javarebel/bpu done
+Event: 8.103 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/b
+Event: 8.103 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/a
+Event: 8.103 loading class com/zeroturnaround/javarebel/nf
+Event: 8.103 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/j
+Event: 8.104 loading class com/zeroturnaround/javarebel/nf done
+Event: 8.104 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/j done
+Event: 8.104 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/k
+Event: 8.104 loading class com/zeroturnaround/javarebel/ne
+Event: 8.104 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/k done
+Event: 8.104 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/a done
+Event: 8.104 loading class com/zeroturnaround/javarebel/gh
+Event: 8.104 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/b done
+Event: 8.104 loading class com/zeroturnaround/javarebel/nn
+Event: 8.104 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/m
+Event: 8.105 loading class com/zeroturnaround/javarebel/nn done
+Event: 8.105 loading class com/zeroturnaround/javarebel/ne done
+Event: 8.105 loading class com/zeroturnaround/javarebel/gh done
+Event: 8.105 loading class com/zeroturnaround/javarebel/my
+Event: 8.105 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/d
+Event: 8.105 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/d done
+Event: 8.105 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/params/m done
+Event: 8.105 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/message/o
+Event: 8.105 loading class com/zeroturnaround/javarebel/my done
+Event: 8.106 loading class com/zeroturnaround/javarebel/bqs
+Event: 8.106 loading class com/zeroturnaround/javarebel/bqs done
+Event: 8.106 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/message/o done
+Event: 8.106 loading class com/zeroturnaround/javarebel/bpl
+Event: 8.107 loading class com/zeroturnaround/javarebel/bpl done
+Event: 8.107 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/a
+Event: 8.107 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/a done
+Event: 8.107 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/c
+Event: 8.108 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/h
+Event: 8.108 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/protocol/h done
+Event: 8.108 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/client/protocol/c done
+Event: 8.108 loading class com/zeroturnaround/javarebel/pf
+Event: 8.108 loading class java/util/concurrent/ConcurrentHashMap$KeyIterator
+Event: 8.109 loading class java/util/concurrent/ConcurrentHashMap$BaseIterator
+Event: 8.109 loading class com/zeroturnaround/javarebel/pf done
+Event: 8.109 loading class java/util/concurrent/ConcurrentHashMap$Traverser
+Event: 8.109 loading class java/util/concurrent/ConcurrentHashMap$Traverser done
+Event: 8.109 loading class java/util/concurrent/ConcurrentHashMap$BaseIterator done
+Event: 8.109 loading class java/util/concurrent/ConcurrentHashMap$KeyIterator done
+Event: 8.109 loading class sun/util/resources/zh/CalendarData_zh
+Event: 8.109 loading class sun/util/resources/zh/CalendarData_zh done
+Event: 8.109 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/auth/j
+Event: 8.110 Executing VM operation: ChangeBreakpoints
+Event: 8.110 loading class com/zeroturnaround/jrebel/bundled/org/apache/http/auth/j done
+
+
+Dynamic libraries:
+0x00007ff760310000 - 0x00007ff76039b000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\bin\java.exe
+0x00007ffda5230000 - 0x00007ffda5429000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffda3dd0000 - 0x00007ffda3e8c000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffda2990000 - 0x00007ffda2c5a000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffda4000000 - 0x00007ffda40aa000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffda3a40000 - 0x00007ffda3ae1000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffda4850000 - 0x00007ffda48eb000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffda44b0000 - 0x00007ffda45cb000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffda40b0000 - 0x00007ffda4250000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffda2fd0000 - 0x00007ffda2ff2000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffda3b80000 - 0x00007ffda3baa000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffda2d10000 - 0x00007ffda2e1c000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffda3210000 - 0x00007ffda32ad000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffda2ed0000 - 0x00007ffda2fd0000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffd8c410000 - 0x00007ffd8c6ab000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19541.1000_none_6a347b1d63b9b5d3\COMCTL32.dll
+0x00007ffda4640000 - 0x00007ffda4670000 	C:\WINDOWS\System32\IMM32.DLL
+0x0000000067de0000 - 0x0000000067eb2000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\msvcr100.dll
+0x0000000067520000 - 0x0000000067ddd000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\server\jvm.dll
+0x00007ffda3c60000 - 0x00007ffda3c68000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffd7b420000 - 0x00007ffd7b429000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffd9a380000 - 0x00007ffd9a38a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffda3f70000 - 0x00007ffda3fda000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffd8c860000 - 0x00007ffd8c887000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffd87170000 - 0x00007ffd8717f000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\verify.dll
+0x00007ffd80d10000 - 0x00007ffd80d39000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\java.dll
+0x00007ffd994e0000 - 0x00007ffd99515000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\jdwp.dll
+0x00007ffd9da90000 - 0x00007ffd9da98000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\npt.dll
+0x00007ffd8b410000 - 0x00007ffd8b44a000 	C:\Users\wsail\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\193.6015.22.plugins\jr-ide-idea\lib\jrebel6\lib\jrebel64.dll
+0x00007ffda3310000 - 0x00007ffda3a37000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ffda22b0000 - 0x00007ffda22bc000 	C:\WINDOWS\SYSTEM32\CRYPTBASE.DLL
+0x00007ffda4250000 - 0x00007ffda42fd000 	C:\WINDOWS\System32\shcore.dll
+0x00007ffda4d60000 - 0x00007ffda50b6000 	C:\WINDOWS\System32\combase.dll
+0x00007ffd9c370000 - 0x00007ffd9c393000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\instrument.dll
+0x00007ffd80cf0000 - 0x00007ffd80d06000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\zip.dll
+0x00007ffda0b20000 - 0x00007ffda12d0000 	C:\WINDOWS\SYSTEM32\windows.storage.dll
+0x00007ffda2340000 - 0x00007ffda236a000 	C:\WINDOWS\SYSTEM32\Wldp.dll
+0x00007ffda4780000 - 0x00007ffda47d5000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ffda28d0000 - 0x00007ffda28f0000 	C:\WINDOWS\SYSTEM32\profapi.dll
+0x00007ffd9da00000 - 0x00007ffd9da09000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\dt_socket.dll
+0x00007ffda2100000 - 0x00007ffda2169000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ffd80d40000 - 0x00007ffd80d5a000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\net.dll
+0x00007ffd86560000 - 0x00007ffd8674d000 	C:\WINDOWS\SYSTEM32\urlmon.dll
+0x00007ffd8c890000 - 0x00007ffd8cb3c000 	C:\WINDOWS\SYSTEM32\iertutil.dll
+0x00007ffd80cd0000 - 0x00007ffd80ce1000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\nio.dll
+0x00007ffd99720000 - 0x00007ffd99734000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\sunec.dll
+0x00007ffd9ff20000 - 0x00007ffd9ff2d000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\management.dll
+0x00007ffd9d9e0000 - 0x00007ffd9d9eb000 	C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\bin\sunmscapi.dll
+0x00007ffda3080000 - 0x00007ffda31dd000 	C:\WINDOWS\System32\CRYPT32.dll
+0x00007ffd994c0000 - 0x00007ffd994db000 	C:\Users\wsail\AppData\Local\Temp\jrebel-temp\ver-93b1e7f9\IdeaWin64.dll
+0x00007ffda2380000 - 0x00007ffda2398000 	C:\WINDOWS\SYSTEM32\CRYPTSP.dll
+0x00007ffda1a60000 - 0x00007ffda1a94000 	C:\WINDOWS\system32\rsaenh.dll
+0x00007ffda31e0000 - 0x00007ffda3207000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffda2890000 - 0x00007ffda28bf000 	C:\WINDOWS\SYSTEM32\USERENV.dll
+0x00007ffda3000000 - 0x00007ffda307f000 	C:\WINDOWS\System32\bcryptprimitives.dll
+0x00007ffda1dd0000 - 0x00007ffda1dfd000 	C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL
+0x00007ffda4840000 - 0x00007ffda4849000 	C:\WINDOWS\System32\NSI.dll
+0x00007ffd999a0000 - 0x00007ffd999b7000 	C:\WINDOWS\SYSTEM32\dhcpcsvc6.DLL
+0x00007ffd99980000 - 0x00007ffd9999d000 	C:\WINDOWS\SYSTEM32\dhcpcsvc.DLL
+0x00007ffda1e10000 - 0x00007ffda1ed8000 	C:\WINDOWS\SYSTEM32\DNSAPI.dll
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:60351,suspend=y,server=n -Drebel.base=C:\Users\wsail\.jrebel -Drebel.env.ide.plugin.version=2020.1.0.1 -Drebel.env.ide.version=2019.3.2 -Drebel.env.ide.product=IU -Drebel.env.ide=intellij -Drebel.notification.url=http://localhost:55482 -agentpath:C:\Users\wsail\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\193.6015.22.plugins\jr-ide-idea\lib\jrebel6\lib\jrebel64.dll -XX:TieredStopAtLevel=1 -Xverify:none -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -javaagent:C:\Users\wsail\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\193.6015.22\plugins\java\lib\rt\debugger-agent.jar -Dfile.encoding=UTF-8 
+java_command: com.cloud.blog.user.CloudUserServiceApplication
+java_class_path (initial): C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\charsets.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\access-bridge-64.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\cldrdata.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\dnsns.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\jaccess.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\localedata.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\nashorn.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\sunec.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\sunjce_provider.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\sunmscapi.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\sunpkcs11.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\ext\zipfs.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\jce.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\jsse.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\management-agent.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\resources.jar;C:\Program Files\RedHat\java-1.8.0-openjdk-1.8.0.222-4\jre\lib\rt.jar;C:\Users\wsail\IdeaProject\blog\cloud-user-service\target\classes;C:\Users\wsail\.m2\repository\org\springframework\boot\spring-boot-starter-web\2.2.2.RELEASE\spring-boot-starter-web-2.2.2.RELEASE.jar;C:\Users\wsail\.m2\repository\org\springframework\boot\spring-boot-starter\2.2.2.RELEASE\spring-boot-starter-2.2.2.RELEASE.jar;C:\Users\wsail\.m2\repository\org\springframework\boot\spring-boot-starter-logging\2.2.2.RELEASE\spring-boot-starter-logging-2.2.2.RELEASE.jar;C:\Users\wsail\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar;C:\Users\wsail\.m2\repository\ch\qos\logback\logback-core\1.2.3\logba
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-13
+CLASSPATH=.;C:\Program Files\Java\jdk-13\lib\dt.jar;C:\Program Files\Java\jdk-13\lib\tools.jar;
+USERNAME=wsail
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 19541 (10.0.19541.1000)
+
+CPU:total 8 (initial active 8) (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 12, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 16644816k(5527640k free), swap 26082000k(5260588k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.222-b10) for windows-amd64 JRE (1.8.0_222-4-redhat-b10), built on Aug  2 2019 20:39:41 by "build" with MS VC++ 10.0 (VS2010)
+
+time: Wed Jan 15 17:06:51 2020
+timezone: 中国标准时间
+elapsed time: 8 seconds (0d 0h 0m 8s)
+

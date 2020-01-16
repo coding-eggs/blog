@@ -1,16 +1,16 @@
 package com.cloud.blog.auth;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import javax.annotation.PostConstruct;
 
+@MapperScan(basePackages = {"com.cloud.blog.auth.mapper"})
 @EnableEurekaClient
-@EnableResourceServer
 @SpringBootApplication
 public class CloudAuthServerApplication {
 
@@ -23,7 +23,6 @@ public class CloudAuthServerApplication {
 
     @PostConstruct
     public void init(){
-
         System.out.println(passwordEncoder.encode("Ws961226"));
     }
 
