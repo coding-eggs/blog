@@ -50,7 +50,7 @@ public class ResourceConfiguration extends ResourceServerConfigurerAdapter {
                 .cors()
                 .and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/blog/user_info","/oauth/**","/actuator/**","/sys/user/register","/sys/user/test").permitAll()
+                .antMatchers("/blog/user_info","/oauth/**","/actuator/**","/sys/user/register").permitAll()
                 .anyRequest().authenticated();
 //                .access("@securityAuthorityDecision.hasPermission(request,authentication)");
     }

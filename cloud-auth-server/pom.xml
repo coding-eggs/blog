@@ -12,11 +12,6 @@
     <name>cloud-auth-server</name>
     <description>Demo project for Spring Boot</description>
 
-    <properties>
-
-        <java.version>1.8</java.version>
-    </properties>
-
     <dependencies>
 
         <!--redis-->
@@ -24,6 +19,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -47,20 +43,21 @@
             <version>${jwt.version}</version>
         </dependency>
 
-
+        <!-- 实体类模块-->
         <dependency>
             <groupId>com.cloud.blog</groupId>
             <artifactId>cloud-model</artifactId>
             <version>${cloud.blog.version}</version>
         </dependency>
 
+        <!--工具类模块-->
         <dependency>
             <groupId>com.cloud.blog</groupId>
             <artifactId>cloud-common</artifactId>
             <version>${cloud.blog.version}</version>
         </dependency>
 
-        <!-- druid -->
+        <!-- druid 数据源 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -96,17 +93,13 @@
                     <overwrite>true</overwrite>
                 </configuration>
             </plugin>
-            <!--防止jks文件被mavne编译导致不可用-->
+
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>cert</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>jks</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
         </plugins>
 
     </build>

@@ -1,10 +1,10 @@
 package com.cloud.blog.auth.config.jwt;
 
 import com.cloud.blog.auth.config.pojo.BaseSecurityUser;
-import com.cloud.blog.auth.config.pojo.Constant;
 import com.cloud.blog.auth.util.JsonUtils;
 import com.cloud.blog.model.po.sys.BlogUser;
 
+import com.cloud.blog.model.po.sys.Constant;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -40,12 +40,6 @@ public class JwtTokenEnhancer extends JwtAccessTokenConverter {
         return super.enhance(defaultOAuth2AccessToken,oAuth2Authentication);
     }
 
-    /**
-     * 解析token
-     * @param value
-     * @param map
-     * @return
-     */
     @Override
     public OAuth2AccessToken extractAccessToken(String value, Map<String, ?> map){
         OAuth2AccessToken oauth2AccessToken = super.extractAccessToken(value, map);

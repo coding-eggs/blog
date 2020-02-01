@@ -68,7 +68,6 @@ public class SecurityAuthorityDecision {
         if (CollectionUtils.isEmpty(operationPowerMap)) {
             loadOperationResourceDefine();
         }
-
         if (CollectionUtils.isEmpty(pagePowerMap)) {
             loadPageResourceDefine();
         }

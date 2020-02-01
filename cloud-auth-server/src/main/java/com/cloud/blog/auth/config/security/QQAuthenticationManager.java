@@ -8,6 +8,7 @@ import com.cloud.blog.model.enums.EnumSex;
 import com.cloud.blog.model.po.sys.BlogRole;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -31,7 +32,7 @@ import java.util.List;
 @Component
 public class QQAuthenticationManager implements AuthenticationManager {
 
-
+    @Autowired
     private  BlogUserMapper blogUserMapper;
 
 
