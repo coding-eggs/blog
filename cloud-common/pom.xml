@@ -11,7 +11,7 @@
 
     <artifactId>cloud-common</artifactId>
     <name>cloud-common</name>
-    <version>${cloud.blog.version}</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
 

@@ -23,6 +23,43 @@ spring:
     username: root
     password: Ws961226
     url: jdbc:mysql://101.37.174.133:1234/cloud_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+
+# 配置Spring Cloud
+  cloud:
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+          envionment:
+            spring:
+              rabbitmq:
+                addresses: 101.37.174.133
+                port: 5672
+                username: admin
+                password: admin
+                virtual-host: my_vhost
+      bindings:
+        # 指定输出管道
+        output_channel:
+          destination: exchange-3
+          group: queue-3
+
+        input_channel:
+          destination: exchange-3
+          group: queue-3
+          consumer:
+            concurrency: 1
+#      rabbit:
+#        bindings:
+#          input_channel:
+#            consumer:
+#              requeue-rejected: false
+#              acknowledge-mode: MANUAL
+#              recovery-interval: 3000
+#              durable-subscription: true
+#              max-concurrency: 5
+
+
 eureka:
   instance:
     hostname: 127.0.0.1
@@ -47,7 +84,6 @@ mybatis:
   type-handlers-package: com.cloud.blog.auth.handler
 
 security:
-
   remember:
     time: 1209600
   oauth2:
@@ -67,7 +103,7 @@ security:
 
 logging:
   level:
-    root: debug
+    root: info
     com:
       cloud:
         blog:

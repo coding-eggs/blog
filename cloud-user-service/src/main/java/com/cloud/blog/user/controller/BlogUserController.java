@@ -35,7 +35,6 @@ public class BlogUserController {
     }
 
     @GetMapping(value = "/get")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public Object get(Authentication authentication){
         //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         authentication.getCredentials();

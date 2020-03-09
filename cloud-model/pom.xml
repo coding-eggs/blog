@@ -12,7 +12,7 @@
 
     <artifactId>cloud-model</artifactId>
     <name>cloud-model</name>
-    <version>${cloud.blog.version}</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
 

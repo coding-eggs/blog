@@ -8,7 +8,7 @@
         <version>1.0</version>
     </parent>
     <artifactId>cloud-auth-server</artifactId>
-    <version>${cloud.blog.version}</version>
+    <version>1.0</version>
     <name>cloud-auth-server</name>
     <description>Demo project for Spring Boot</description>
 

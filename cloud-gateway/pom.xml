@@ -8,7 +8,7 @@
         <version>1.0</version>
     </parent>
     <artifactId>cloud-gateway</artifactId>
-    <version>${cloud.blog.version}</version>
+    <version>1.0</version>
     <name>cloud-gateway</name>
     <description>gateway</description>
 

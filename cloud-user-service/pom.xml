@@ -6,11 +6,10 @@
         <groupId>com.cloud.blog</groupId>
         <artifactId>blog</artifactId>
         <version>1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <artifactId>cloud-user-service</artifactId>
-    <version>${cloud.blog.version}</version>
-    <name>user</name>
+    <version>1.0</version>
+    <name>cloud-user-service</name>
     <description>user service</description>
 
     <dependencies>
@@ -47,6 +46,11 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.cloud.blog</groupId>
