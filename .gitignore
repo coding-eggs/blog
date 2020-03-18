@@ -32,3 +32,6 @@ build/
 
 ### Jrebel ###
 rebel.xml
+
+### mvn ###
+mvnw.*
