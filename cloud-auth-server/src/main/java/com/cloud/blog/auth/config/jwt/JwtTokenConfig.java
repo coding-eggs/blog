@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+import org.springframework.util.DigestUtils;
 
 /**
  * @ClassName JwtTokenConfig
@@ -37,5 +38,11 @@ public class JwtTokenConfig {
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("ailuoli.jks"), "Ws961226".toCharArray());
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("ailuoli"));
         return converter;
+    }
+
+    public static void main(String[] args) {
+
+
+        System.out.println(DigestUtils.md5DigestAsHex("Ws961226".getBytes()));
     }
 }
